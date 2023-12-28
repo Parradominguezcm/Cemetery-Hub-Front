@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { useEffect, useState } from "react";
+import Cookies from 'js-cookie'
+import './styles.scss'
+import Tasks from './components/Tasks';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+import CreateTask from "./components/CreateTask";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedInUser, setLoggedInUser] = useState(null)
+
+  useEffect(() => {
+    const token = Cookies.get('token')
+    if (token) {
+      fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token
+        }),
+      }).then(async (res) => {
+        const userData = await res.json()
+        setLoggedIn(res.ok)
+        setLoggedInUser(userData.userName)
+      })
+    }
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR Hello new app!
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/createTask" element={<CreateTask loggedIn={loggedIn} setLoggedIn={setLoggedIn} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} />} />
+        <Route path="/logIn" element={<LogIn loggedIn={loggedIn} setLoggedIn={setLoggedIn} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} />} />
+        <Route path="/SignUp" element={<SignUp loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+        <Route path="/" element={<Tasks loggedIn={loggedIn} setLoggedIn={setLoggedIn} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} />} />
+      </Routes>
+    </Router>
+  );
 }
-
-export default App
