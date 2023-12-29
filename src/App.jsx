@@ -10,6 +10,8 @@ import Tasks from './components/Tasks';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import CreateTask from "./components/CreateTask";
+import PostMessage from "./components/PostMessage";
+import MessageBoard from "./components/MessageBoard"
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -37,6 +39,8 @@ export default function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/messageBoard" element={<MessageBoard loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}></Route>
+        <Route path="/postMessage" element={<PostMessage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}></Route>
         <Route path="/createTask" element={<CreateTask loggedIn={loggedIn} setLoggedIn={setLoggedIn} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} />} />
         <Route path="/logIn" element={<LogIn loggedIn={loggedIn} setLoggedIn={setLoggedIn} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} />} />
         <Route path="/SignUp" element={<SignUp loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />

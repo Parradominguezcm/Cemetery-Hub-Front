@@ -25,13 +25,15 @@ export default function Tasks({ loggedIn, setLoggedIn }) {
         <div className="container">
             <div>
                 <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-                <h3>Volunteer's to-do list</h3>
+
             </div>
             {!loggedIn && <div>
+                <h2>Welcome to the Cemetery's communications center!</h2>
                 <Link to="/login"><button className="btn btn-primary m-3">Log in to view and manage your tasks</button></Link>
                 <Link to="/signup"><button className="btn btn-primary m-3">Sign up to get started</button></Link>
             </div>}
             {loggedIn && <div>
+                <h3>Volunteer's to-do list</h3>
                 {tasks.length === 0 && <h1> No tasks</h1>}
                 {tasks.length > 0 &&
                     <div>
@@ -58,7 +60,6 @@ export default function Tasks({ loggedIn, setLoggedIn }) {
                                         <th scope="row">{id}</th>
                                         <td>{task_title}</td>
                                         <td>{task_description}</td>
-                                        <td>{task_deadline}</td>
                                         <td><input type="checkbox" /></td>
                                     </tr>
                                 })}
