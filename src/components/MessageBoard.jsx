@@ -32,7 +32,7 @@ export default function MessageBoard({ loggedIn, setLoggedIn }) {
             </div>}
             {loggedIn && <div>
                 <h3>Highgate Cemetery's Notice Board</h3>
-                {messages.length === 0 && <h1> No tasks</h1>}
+                {messages.length === 0 && <div><h1> No Messages available</h1><button type="button" className="btn-outline-success m-3"><Link to="/postMessage">Post a Message</Link></button></div>}
                 {messages.length > 0 &&
                     <div>
                         {messages.map(({ message, username, date_posted }, idx) => {

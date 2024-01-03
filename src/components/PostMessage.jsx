@@ -34,10 +34,11 @@ export default function PostMessage({ loggedIn, setLoggedIn }) {
 
     if (submitted) {
         return (
-            <div>
+            <div className="container">
+                <Header />
                 <h2>Message Posted!</h2>
-                <a href="/" >View your tasks</a>
-                <a href="/messageBoard">View all messages</a>
+                <Link to="/"><button className="btn btn-primary m-3">Take a look at your to do list</button></Link>
+                <Link to="/messageBoard"><button className="btn btn-primary m-3">View the message board!</button></Link>
             </div>
         )
     }

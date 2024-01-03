@@ -3,6 +3,7 @@ import Header from "./Header";
 import { useEffect, useState } from "react";
 import { tasksAPICall } from "../apiHelpers/tasksApiCall";
 import Cookies from 'js-cookie'
+import Task from "./Task";
 
 
 export default function Tasks({ loggedIn, setLoggedIn }) {
@@ -34,7 +35,8 @@ export default function Tasks({ loggedIn, setLoggedIn }) {
             </div>}
             {loggedIn && <div>
                 <h3>Volunteer's to-do list</h3>
-                {tasks.length === 0 && <h1> No tasks</h1>}
+                {tasks.length === 0 && <div><h1> No tasks</h1>
+                    <button type="button" className="btn-outline-success"><Link to="/createTask">Create a task</Link></button></div>}
                 {tasks.length > 0 &&
                     <div>
                         <table class="table">
@@ -52,17 +54,12 @@ export default function Tasks({ loggedIn, setLoggedIn }) {
                                     task_title,
                                     task_description,
                                     task_completed,
-                                    user_id,
                                     id,
                                     task_deadline
                                 }) => {
-                                    return <tr key={id}>
-                                        <th scope="row">{id}</th>
-                                        <td>{task_title}</td>
-                                        <td>{task_description}</td>
-                                        <td><input type="checkbox" /></td>
-                                    </tr>
+                                    return <Task id={id} taskDeadline={task_deadline} taskTitle={task_title} taskDescription={task_description} taskCompleted={task_completed} />
                                 })}
+
                             </tbody>
                         </table>
                         <button type="button" className="btn-outline-success"><Link to="/createTask">Create a task</Link></button>

@@ -44,9 +44,11 @@ export default function CreateTask({ loggedIn, setLoggedIn }) {
 
     if (submitted) {
         return (
-            <div>
+            <div className="container">
+                <Header />
                 <h2>Task created successfully!</h2>
-                <a href="/" >View your tasks</a>
+                <Link to="/"><button className="btn btn-primary m-3">View your tasks</button></Link>
+                <Link to="/messageBoard"><button className="btn btn-primary m-3">Check the message board</button></Link>
             </div>
         )
     }

@@ -25,7 +25,7 @@ export default function SignUp({ loggedIn, setLoggedIn }) {
         } else if (!result.status) {
             setErrors(result.message)
         } else {
-            setSignupSuccessful(result.success)
+            setSignupSuccessful(result.status)
         }
     }
 
