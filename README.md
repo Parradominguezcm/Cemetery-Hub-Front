@@ -7,6 +7,8 @@ Sign up and log in easily with your email address, and navigate to your personal
 
 Only registered users are able to see the messages you post.
 
+Link to the backend repo: https://github.com/Parradominguezcm/Cemetery-hub-back
+
 ## Run Locally
 
 Clone the project
